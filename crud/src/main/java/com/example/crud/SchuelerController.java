@@ -25,17 +25,18 @@ public class SchuelerController {
     }
 
     @RequestMapping(value = "/schueler", method = RequestMethod.POST)
-    public String schuelerCreate(schueler schueler) {
+    public String schuelerCreate(Schueler schueler) {
     schueler = schuelerRepository.save(schueler);
     return "redirect:/schueler/" + schueler.getId();
     }
     @RequestMapping(value ="/schueler/{schuelerId}", method = RequestMethod.GET)
     public String schuelerShow(@PathVariable("schuelerId") Integer schuelerId, Model model){
-        Optional<schueler> schueler = schuelerRepository.findById(schuelerId);
-        model.addAttribute("schueler",schueler);
+        Schueler schueler = schuelerRepository.findById(schuelerId).get();
+        model.addAttribute("schueler",  schueler);
 
         return "schueler/show";
     }
 
 
 }
+
